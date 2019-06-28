@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Exv</string>
+    <string name="worker_detail_family">Фамилия</string>
+    <string name="worker_detail_birthday">Дата рождения</string>
+    <string name="worker_detail_spec">Специальность</string>
+    <string name="worker_detail_name">Имя</string>
+    <string name="worker_detail_age">Возраст</string>
+
+    <string name="error_load_data">Ошибка получения данных</string>
+    <string name="error_load_data_retry_button">Повторить</string>
+
+    <string name="binding_no_date">–</string>
+    <string name="title_specialities">Специальности</string>
+    <string name="title_worker_detail_fragment">Подробно</string>
+</resources>

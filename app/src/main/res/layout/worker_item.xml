@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <data>
+        <variable
+                name="worker"
+                type="com.kos.exv.models.Worker"/>
+        <import type="com.kos.exv.binding.WorkerUtil"/>
+    </data>
+<LinearLayout
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              style="@style/Clickable"
+              android:padding="12dp"
+
+>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/birthdayText"
+            tools:text="Specialization TAB extra surPrise"
+            android:text="@{WorkerUtil.fullName(worker)}"
+            style="@style/WorkerItemName"
+
+    />
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ageText"
+            style="@style/WorkerItemAge"
+            app:ageText="@{worker.birthday}"
+            app:quantityRes="@{@plurals/age}"
+            app:noDate="@{@string/binding_no_date}"
+    />
+</LinearLayout>
+</layout>

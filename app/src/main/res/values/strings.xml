@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Exv</string>
+    <string name="worker_detail_family">Last name</string>
+    <string name="worker_detail_birthday">Birthday</string>
+    <string name="worker_detail_spec">Specialty</string>
+    <string name="worker_detail_name">First Name</string>
+    <string name="worker_detail_age">Age</string>
+
+    <string name="error_load_data">Internet error</string>
+    <string name="error_load_data_retry_button">Retry</string>
+
+    <string name="binding_no_date">–</string>
+    <string name="title_specialities">Specialties</string>
+    <string name="title_worker_detail_fragment">Detail</string>
+</resources>

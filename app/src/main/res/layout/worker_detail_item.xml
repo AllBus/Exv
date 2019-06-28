@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <data>
+        <variable
+                name="vm"
+                type="com.kos.exv.viewmodels.WorkerDetailViewModel"/>
+
+        <import type="com.kos.exv.binding.WorkerUtil"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:showIn="@layout/worker_detail_fragment">
+
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/guidelineStart"
+                                                    app:layout_constraintGuide_begin="16dp"
+                                                    android:orientation="vertical"/>
+
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/guidelineEnd"
+                                                    android:orientation="vertical"
+                                                    app:layout_constraintGuide_end="16dp"/>
+
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/guidelineSeparator"
+                                                    app:layout_constraintGuide_begin="160dp"
+                                                    android:orientation="vertical"/>
+
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  app:layout_constraintEnd_toStartOf="@+id/guidelineSeparator"
+                  android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                  app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                  android:gravity="end"
+                  android:id="@+id/nameLabel"
+                  style="@style/WorkerDetailLabel"
+                  app:layout_constraintHorizontal_bias="0.0"
+                  android:text="@string/worker_detail_name"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:layout_marginTop="32dp"/>
+
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  app:layout_constraintEnd_toStartOf="@+id/guidelineSeparator"
+                  android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                  app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                  android:gravity="end"
+                  android:id="@+id/familyLabel" app:layout_constraintHorizontal_bias="0.0"
+                  android:text="@string/worker_detail_family"
+                  style="@style/WorkerDetailLabel"
+                  app:layout_constraintTop_toBottomOf="@id/barrierName"
+                  android:layout_marginTop="8dp"/>
+
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  app:layout_constraintEnd_toStartOf="@+id/guidelineSeparator"
+                  android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                  app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                  android:gravity="end"
+                  android:id="@+id/birthdayLabel"
+                  style="@style/WorkerDetailLabel"
+                  app:layout_constraintHorizontal_bias="0.5"
+                  android:text="@string/worker_detail_birthday"
+                  app:layout_constraintTop_toBottomOf="@id/barrierFamily"
+                  android:layout_marginTop="8dp"/>
+
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  app:layout_constraintEnd_toStartOf="@+id/guidelineSeparator"
+                  android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                  app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                  android:gravity="end"
+                  android:id="@+id/ageLabel"
+                  style="@style/WorkerDetailLabel"
+                  app:layout_constraintHorizontal_bias="0.5"
+                  android:layout_marginTop="8dp"
+                  android:text="@string/worker_detail_age"
+                  app:layout_constraintTop_toTopOf="@+id/barrierBirthday"
+        />
+
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  app:layout_constraintEnd_toStartOf="@+id/guidelineSeparator"
+                  android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                  app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                  android:gravity="end"
+                  android:id="@+id/specLabel"
+                  style="@style/WorkerDetailLabel"
+                  app:layout_constraintHorizontal_bias="0.0"
+                  android:text="@string/worker_detail_spec"
+                  app:layout_constraintTop_toBottomOf="@id/barrierAge" android:layout_marginTop="8dp"
+                  android:layout_marginBottom="32dp" app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintVertical_bias="0.0"/>
+
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameText"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineSeparator" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                tools:text="Very small line for multiline texview. However contains dummy text in place"
+                android:text="@{WorkerUtil.formatName(vm.worker.firstName)}"
+                style="@style/WorkerDetailText"
+                app:layout_constraintTop_toTopOf="@+id/nameLabel"
+        />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/familyText"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineSeparator" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                tools:text="Very small line for multiline texview. However contains dummy text in place"
+                android:text="@{WorkerUtil.formatName(vm.worker.lastName)}"
+                style="@style/WorkerDetailText"
+                app:layout_constraintTop_toTopOf="@+id/familyLabel"
+        />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/birthdayText"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineSeparator" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                tools:text="Very small line for multiline texview. However contains dummy text in place"
+                app:formatDate="@{vm.worker.birthday}"
+                app:noDate="@{@string/binding_no_date}"
+                style="@style/WorkerDetailText"
+                app:layout_constraintTop_toTopOf="@+id/birthdayLabel"
+
+        />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/ageText"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineSeparator" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                tools:text="Very small line for multiline texview. However contains dummy text in place"
+                app:ageText="@{vm.worker.birthday}"
+                app:quantityRes="@{@plurals/age}"
+                app:noDate="@{@string/binding_no_date}"
+                style="@style/WorkerDetailText"
+                app:layout_constraintTop_toTopOf="@+id/ageLabel"
+        />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/specText" app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineSeparator" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                tools:text="Very small line for multiline texview. However contains dummy text in place"
+                android:text="@{vm.specialities}"
+                style="@style/WorkerDetailText"
+                app:layout_constraintTop_toTopOf="@+id/specLabel"
+
+                android:layout_marginBottom="32dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0"/>
+
+        <androidx.constraintlayout.widget.Barrier android:layout_width="wrap_content"
+                                                  android:layout_height="wrap_content"
+                                                  android:id="@+id/barrierName" app:barrierDirection="bottom"
+                                                  tools:layout_editor_absoluteY="241dp"
+                                                  app:constraint_referenced_ids="nameText,nameLabel"/>
+
+        <androidx.constraintlayout.widget.Barrier android:layout_width="wrap_content"
+                                                  android:layout_height="wrap_content"
+                                                  android:id="@+id/barrierFamily" app:barrierDirection="bottom"
+                                                  tools:layout_editor_absoluteY="241dp"
+                                                  app:constraint_referenced_ids="familyText,familyLabel"/>
+
+        <androidx.constraintlayout.widget.Barrier android:layout_width="wrap_content"
+                                                  android:layout_height="wrap_content"
+                                                  android:id="@+id/barrierAge" app:barrierDirection="bottom"
+                                                  tools:layout_editor_absoluteY="241dp"
+                                                  app:constraint_referenced_ids="ageText,ageLabel"/>
+
+        <androidx.constraintlayout.widget.Barrier android:layout_width="wrap_content"
+                                                  android:layout_height="wrap_content"
+                                                  android:id="@+id/barrierBirthday" app:barrierDirection="bottom"
+                                                  tools:layout_editor_absoluteY="241dp"
+                                                  app:constraint_referenced_ids="birthdayText,birthdayLabel"/>
+
+        <androidx.constraintlayout.widget.Barrier android:layout_width="wrap_content"
+                                                  android:layout_height="wrap_content"
+                                                  android:id="@+id/barrierSpec" app:barrierDirection="bottom"
+                                                  app:constraint_referenced_ids="specText,specLabel"
+        />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

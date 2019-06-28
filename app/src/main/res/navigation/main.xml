@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main"
+            app:startDestination="@id/specFragment">
+
+    <fragment android:id="@+id/specFragment" android:name="com.kos.exv.fragments.SpecFragment"
+              android:label="spec_fragment" tools:layout="@layout/spec_fragment">
+        <action android:id="@+id/action_specFragment_to_workerListFragment" app:destination="@id/workerListFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment android:id="@+id/workerDetailFragment" android:name="com.kos.exv.fragments.WorkerDetailFragment"
+              android:label="worker_detail_fragment" tools:layout="@layout/worker_detail_fragment">
+        <argument android:name="workerId" app:argType="integer"/>
+    </fragment>
+    <fragment android:id="@+id/workerListFragment" android:name="com.kos.exv.fragments.WorkerListFragment"
+              android:label="worker_list_fragment" tools:layout="@layout/worker_list_fragment">
+        <action android:id="@+id/action_workerListFragment_to_workerDetailFragment"
+                app:destination="@id/workerDetailFragment" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <argument android:name="specId" app:argType="integer"/>
+    </fragment>
+</navigation>
