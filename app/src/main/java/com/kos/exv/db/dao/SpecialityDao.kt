@@ -26,4 +26,7 @@ interface SpecialityDao {
 
     @Query("SELECT * FROM Speciality WHERE id = :id")
     fun getSpecialityById(id:Int): LiveData<Speciality>
+
+    @Query("SELECT * FROM Speciality WHERE id = :id")
+    fun getSpecialityByNames(id:Int): LiveData<Speciality>
 }

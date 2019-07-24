@@ -18,14 +18,18 @@ import kotlinx.android.synthetic.main.spec_fragment.view.*
 class SpecFragment : MainFragment() {
 
     private lateinit var viewModel: SpecViewModel
-    private lateinit var list: RecyclerView
-    private lateinit var adapter: SpecialityAdapter
+    private var list: RecyclerView? = null
+    private var adapter: SpecialityAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.spec_fragment, container, false)
+        return inflater.inflate(R.layout.spec_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         list = view.list
         adapter = SpecialityAdapter {
@@ -36,10 +40,8 @@ class SpecFragment : MainFragment() {
             )
         }
 
-        list.adapter = adapter
-        list.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
-
-        return view
+        list?.adapter = adapter
+        list?.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -47,23 +49,25 @@ class SpecFragment : MainFragment() {
         viewModel = ViewModelProviders.of(this).get(SpecViewModel::class.java)
 
 
-        viewModel.loadFailure.observe(this, Observer { e ->
+        viewModel.loadFailure.observe(this.viewLifecycleOwner, Observer { e ->
             e?.let {
 
                 if (!viewModel.hasData()) {
-                    val snackbar = Snackbar.make(list, R.string.error_load_data, Snackbar.LENGTH_INDEFINITE)
-                    snackbar.setAction(R.string.error_load_data_retry_button) {
-                        snackbar.dismiss()
-                        viewModel.reloadDataIfNeed(true)
+                    list?.let {view ->
+                        val snackbar = Snackbar.make(view, R.string.error_load_data, Snackbar.LENGTH_INDEFINITE)
+                        snackbar.setAction(R.string.error_load_data_retry_button) {
+                            snackbar.dismiss()
+                            viewModel.reloadDataIfNeed(true)
+                        }
+                        snackbar.show()
                     }
-                    snackbar.show()
                 }
             }
         })
 
-        viewModel.specialities.observe(this, Observer { items ->
+        viewModel.specialities.observe(this.viewLifecycleOwner, Observer { items ->
             items?.let {
-                adapter.changeList(it)
+                adapter?.changeList(it)
             }
         })
 
@@ -72,4 +76,9 @@ class SpecFragment : MainFragment() {
         title(R.string.title_specialities)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter = null
+        list = null
+    }
 }

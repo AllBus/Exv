@@ -3,15 +3,17 @@ package com.kos.exv.adapters.viewholders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-open class SimpleViewHolder<T : Any>(itemView: View, clickListener: View.OnClickListener) :
-    RecyclerView.ViewHolder(itemView) {
+open class SimpleViewHolder<T : Any>(itemView: View, private val clickFunction : (T) -> Unit) :
+    RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-    lateinit var data: T
+    var data: T? = null
+
+    override fun onClick(v: View?) {
+        data?.let(clickFunction)
+    }
 
     init {
-        itemView.setOnClickListener(clickListener)
-        @Suppress("LeakingThis")
-        itemView.tag = this
+        itemView.setOnClickListener(this)
     }
 
     open fun bind(data: T) {

@@ -21,7 +21,7 @@ class WorkerDetailFragment : MainFragment() {
     ): View? {
 
         binding = WorkerDetailFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         return binding.root
     }

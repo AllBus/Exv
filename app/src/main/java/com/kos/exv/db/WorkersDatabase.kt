@@ -18,20 +18,4 @@ abstract class WorkersDatabase: RoomDatabase() {
     abstract fun specialityDao(): SpecialityDao
     abstract fun workerSpecialityDao(): WorkerSpecialityDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: WorkersDatabase? = null
-
-        fun getDatabase(context: Context): WorkersDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    WorkersDatabase::class.java,
-                    "workers_db"
-                ).build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
 }

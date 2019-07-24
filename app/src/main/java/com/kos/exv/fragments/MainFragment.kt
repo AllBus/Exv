@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.kos.exv.R
 
@@ -36,4 +39,9 @@ open class MainFragment : Fragment() {
             }
         }
     }
+
+    inline fun <reified T : ViewModel> injectViewModel(factory: ViewModelProvider.Factory): T {
+        return ViewModelProviders.of(this, factory)[T::class.java]
+    }
 }
+

@@ -12,7 +12,7 @@ class SpecialityAdapter(clickFunction : (Speciality) -> Unit)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialityViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = SpecItemBinding.inflate(inflater, parent, false)
-        return SpecialityViewHolder( binding, clickListener)
+        return SpecialityViewHolder( binding, clickFunction)
     }
 
 }

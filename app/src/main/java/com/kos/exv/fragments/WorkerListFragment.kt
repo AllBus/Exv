@@ -18,16 +18,19 @@ import kotlinx.android.synthetic.main.spec_fragment.view.*
 class WorkerListFragment : MainFragment() {
 
     private lateinit var viewModel: WorkerListViewModel
-    private lateinit var list: RecyclerView
-    private lateinit var adapter: WorkerAdapter
+    private var adapter: WorkerAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.worker_list_fragment, container, false)
+        return inflater.inflate(R.layout.worker_list_fragment, container, false)
+    }
 
-        list = view.list
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val list = view.list
         adapter = WorkerAdapter {
             val directions = WorkerListFragmentDirections.actionWorkerListFragmentToWorkerDetailFragment(it.id)
             Navigation.findNavController(view).navigate(
@@ -39,7 +42,6 @@ class WorkerListFragment : MainFragment() {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
-        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,15 +53,20 @@ class WorkerListFragment : MainFragment() {
             of(this, WorkerListViewModelFactory(application(), specId)).
             get(WorkerListViewModel::class.java)
 
-        viewModel.workers.observe(this, Observer { items ->
-            items?.let { adapter.changeList(it) }
+        viewModel.workers.observe(this.viewLifecycleOwner, Observer { items ->
+            items?.let { adapter?.changeList(it) }
         })
 
-        viewModel.speciality.observe(this, Observer { speciality ->
+        viewModel.speciality.observe(this.viewLifecycleOwner, Observer { speciality ->
             speciality?.let { title(it.name) }
         })
 
         setupToolbar()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter = null
     }
 
     private fun getSpecialityId(): Int {

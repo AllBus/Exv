@@ -3,18 +3,18 @@ package com.kos.exv.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.kos.exv.db.WorkersDatabase
+import com.kos.exv.App
 import com.kos.exv.repositories.WorkerRepository
+import javax.inject.Inject
 
 open class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    protected val repository: WorkerRepository
-    val loadFailure: LiveData<Exception>
+    @Inject
+    protected lateinit var repository: WorkerRepository
+    val loadFailure: LiveData<Throwable>
 
     init {
-        val dao = WorkersDatabase.getDatabase(application).workerSpecialityDao()
-        repository = WorkerRepository(dao)
-
+        App.component.inject(this)
         loadFailure = repository.loadFailure
     }
 
